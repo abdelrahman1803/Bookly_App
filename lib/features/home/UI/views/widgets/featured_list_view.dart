@@ -1,4 +1,4 @@
-import 'package:bookly_app/features/home/UI/views/widgets/featured_list_view_item.dart';
+import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
 
 class FeaturedBooksListView extends StatelessWidget {
@@ -12,7 +12,7 @@ class FeaturedBooksListView extends StatelessWidget {
         itemCount: 10,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
-          return const FeaturedListViewItem();
+          return const CustomBookItem();
         },
       ),
     );
