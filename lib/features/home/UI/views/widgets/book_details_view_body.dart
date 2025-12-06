@@ -10,6 +10,8 @@ class BookDetailsViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const CustomBookDetailsAppBar(),
         SizedBox(
@@ -18,7 +20,7 @@ class BookDetailsViewBody extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         const Text("The Jungle Book", style: Styles.textStyle30),
-        const Text("Writer Name", style: Styles.textStyle20),
+        const Text("Writer Name", style: Styles.textStyle18),
         const SizedBox(height: 20),
         const BookRating(),
       ],
