@@ -1,7 +1,10 @@
+import 'package:bookly_app/constats.dart';
 import 'package:bookly_app/core/utilities/styles.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/book_rating.dart';
+import 'package:bookly_app/features/home/UI/views/widgets/books_action.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_book_deatails_app_bar.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
+import 'package:bookly_app/features/home/UI/views/widgets/similar_books_list_view.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
@@ -10,8 +13,6 @@ class BookDetailsViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const CustomBookDetailsAppBar(),
         SizedBox(
@@ -20,9 +21,30 @@ class BookDetailsViewBody extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         const Text("The Jungle Book", style: Styles.textStyle30),
-        const Text("Writer Name", style: Styles.textStyle18),
-        const SizedBox(height: 20),
-        const BookRating(),
+        Opacity(
+          opacity: 0.7,
+          child: Text(
+            "Writer Name",
+            style: Styles.textStyle18.copyWith(fontStyle: FontStyle.italic),
+          ),
+        ),
+        const SizedBox(height: 10),
+        const BookRating(mainAxisAlignment: MainAxisAlignment.center),
+        const SizedBox(height: 30),
+        const BooksAction(),
+        const SizedBox(height: 30),
+        Padding(
+          padding: kPaddingSH16,
+          child: Align(
+            alignment: AlignmentGeometry.centerLeft,
+            child: Text(
+              "You may also like",
+              style: Styles.textStyle16.copyWith(fontWeight: FontWeight.w900),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        SimilarBooksListView(),
       ],
     );
   }
