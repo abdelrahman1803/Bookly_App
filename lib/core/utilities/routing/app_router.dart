@@ -25,7 +25,7 @@ abstract class AppRouter {
       ),
       // Search View Route
       GoRoute(
-        path: Routes.bookDetailsView,
+        path: Routes.searchView,
         builder: (context, state) => const SearchView(),
       ),
     ],

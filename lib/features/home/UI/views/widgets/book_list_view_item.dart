@@ -6,8 +6,8 @@ import 'package:bookly_app/features/home/UI/views/widgets/book_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class BestSellerListViewItem extends StatelessWidget {
-  const BestSellerListViewItem({super.key});
+class BookListViewItem extends StatelessWidget {
+  const BookListViewItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,9 @@ class BestSellerListViewItem extends StatelessWidget {
                 aspectRatio: 0.7,
                 child: Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage(AssetsData.testImage)),
+                    image: DecorationImage(
+                      image: AssetImage(AssetsData.testImage),
+                    ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
@@ -39,7 +41,9 @@ class BestSellerListViewItem extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.6,
                     child: Text(
                       "Harry Potter and the Goblet of Fire",
-                      style: Styles.textStyle20.copyWith(fontFamily: kGtSectraFine),
+                      style: Styles.textStyle20.copyWith(
+                        fontFamily: kGtSectraFine,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
