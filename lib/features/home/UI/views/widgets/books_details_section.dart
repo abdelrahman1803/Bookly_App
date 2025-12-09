@@ -13,7 +13,7 @@ class BookDetailsSection extends StatelessWidget {
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width / 2,
-          child: const CustomBookItem(),
+          child: const CustomBookItem(imageUrl: 'https://scontent.fcai19-1.fna.fbcdn.net/v/t39.30808-6/465796954_1740435256809270_7751944406033086737_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=QK0xaWA0mbMQ7kNvwE_tEdw&_nc_oc=Adl0o7anLgiNkiB4LL3QNpKaAv11ivfFecbcEOHFikvKpIjwsNdmaOUWQZhJoslbaRI&_nc_zt=23&_nc_ht=scontent.fcai19-1.fna&_nc_gid=iY-LX4rvKqHyCrvTuKfkMg&oh=00_AfndDF7jZjLyXbMwOFx_Wdqqys6VlVMIVZbjBMOOmguvMA&oe=693E341B',),
         ),
         const SizedBox(height: 30),
         const Text("The Jungle Book", style: Styles.textStyle30),

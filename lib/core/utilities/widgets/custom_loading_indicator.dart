@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CleanLoadingIndicator extends StatefulWidget {
+class CustomLoadingIndicator extends StatefulWidget {
   final double size;
   final Color color;
   final Duration duration;
 
-  const CleanLoadingIndicator({
+  const CustomLoadingIndicator({
     super.key,
     this.size = 40,
     this.color = const Color(0xFF00B8F4), // Baby Blue
@@ -13,10 +13,10 @@ class CleanLoadingIndicator extends StatefulWidget {
   });
 
   @override
-  State<CleanLoadingIndicator> createState() => _CleanLoadingIndicatorState();
+  State<CustomLoadingIndicator> createState() => _CustomLoadingIndicatorState();
 }
 
-class _CleanLoadingIndicatorState extends State<CleanLoadingIndicator>
+class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
     with SingleTickerProviderStateMixin {
 
   late AnimationController _controller;
