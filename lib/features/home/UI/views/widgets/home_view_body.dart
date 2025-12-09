@@ -1,8 +1,8 @@
 import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utilities/styles.dart';
-import 'package:bookly_app/features/home/UI/views/widgets/best_seller_list_view.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_app_bar.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/featured_list_view.dart';
+import 'package:bookly_app/features/home/UI/views/widgets/latest_books_list_view.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -22,7 +22,7 @@ class HomeViewBody extends StatelessWidget {
               Padding(
                 padding: kPaddingSH16,
                 child: Text(
-                  "Best Seller",
+                  "Latest Books",
                   style: Styles.textStyle20.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -33,7 +33,10 @@ class HomeViewBody extends StatelessWidget {
           ),
         ),
         SliverFillRemaining(
-          child: Padding(padding: kPaddingSH16, child: BestSellerListView()),
+          child: Padding(
+            padding: kPaddingSH16,
+            child: LatestBooksListView(bookModel: null),
+          ),
         ),
       ],
     );

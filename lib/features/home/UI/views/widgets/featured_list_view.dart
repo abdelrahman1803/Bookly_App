@@ -1,6 +1,6 @@
 import 'package:bookly_app/core/utilities/widgets/custom_error_image_widget.dart';
-import 'package:bookly_app/core/utilities/widgets/custom_error_widget.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
+import 'package:bookly_app/core/utilities/widgets/widget_error.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
 import 'package:bookly_app/features/splash/UI/view%20models/featured%20books%20cubit/featured_books_cubit.dart';
 import 'package:flutter/material.dart';
@@ -16,24 +16,20 @@ class FeaturedBooksListView extends StatelessWidget {
       child: BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
         builder: (context, state) {
           if (state is FeaturedBooksSuccess) {
-            return ListView.builder(
+            return ListView.separated(
               itemCount: state.books.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 final imageUrl =
                     state.books[index].volumeInfo?.imageLinks?.thumbnail;
-
                 return imageUrl != null && imageUrl.isNotEmpty
                     ? CustomBookItem(imageUrl: imageUrl)
                     : const ErrorImageWidget();
               },
+              separatorBuilder: (context, index) => SizedBox(width: 10),
             );
           } else if (state is FeaturedBooksFailure) {
-            return CustomErrorWidget(
-              errMessage: state.errMessage,
-              onRetry: () =>
-                  context.read<FeaturedBooksCubit>().fetchFeaturedBooks(),
-            );
+            return WidgetError(errMessage: state.errMessage);
           } else {
             return const CustomLoadingIndicator();
           }

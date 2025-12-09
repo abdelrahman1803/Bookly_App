@@ -5,27 +5,33 @@ class ErrorImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey.shade200,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.menu_book_rounded,
-              size: 40,
-              color: Colors.grey.shade500,
+    return ClipRRect(
+      borderRadius: BorderRadiusGeometry.circular(16),
+      child: AspectRatio(
+        aspectRatio: 0.7,
+        child: Container(
+          color: Colors.grey.shade200,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.menu_book_rounded,
+                  size: 40,
+                  color: Colors.grey.shade500,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "No Cover",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey.shade500,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 8),
-            Text(
-              "No Cover",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

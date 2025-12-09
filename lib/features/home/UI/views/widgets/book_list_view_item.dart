@@ -3,11 +3,12 @@ import 'package:bookly_app/core/utilities/assets.dart';
 import 'package:bookly_app/core/utilities/routing/routes.dart';
 import 'package:bookly_app/core/utilities/styles.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/book_rating.dart';
+import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BookListViewItem extends StatelessWidget {
-  const BookListViewItem({super.key});
+  const BookListViewItem({super.key, required BookModel bookModel});
 
   @override
   Widget build(BuildContext context) {

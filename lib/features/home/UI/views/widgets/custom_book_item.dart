@@ -9,13 +9,16 @@ class CustomBookItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: AspectRatio(
-        aspectRatio: 0.7,
-        child: CachedNetworkImage(
-          fit: BoxFit.fill,
-          imageUrl: imageUrl,
-          placeholder: (context, url) => CustomLoadingIndicator(),
-          errorWidget: (context, url, error) => const ErrorImageWidget(),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: AspectRatio(
+          aspectRatio: 0.7,
+          child: CachedNetworkImage(
+            fit: BoxFit.fill,
+            imageUrl: imageUrl,
+            placeholder: (context, url) => CustomLoadingIndicator(),
+            errorWidget: (context, url, error) => const ErrorImageWidget(),
+          ),
         ),
       ),
     );
