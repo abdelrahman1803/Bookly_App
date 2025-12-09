@@ -1,4 +1,4 @@
-import 'package:bookly_app/constats.dart';
+import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utilities/styles.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/best_seller_list_view.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_app_bar.dart';

@@ -1,4 +1,4 @@
-import 'package:bookly_app/constats.dart';
+import 'package:bookly_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class Styles {

@@ -1,4 +1,4 @@
-import 'package:bookly_app/constats.dart';
+import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 

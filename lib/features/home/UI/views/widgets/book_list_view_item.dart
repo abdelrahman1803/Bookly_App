@@ -1,4 +1,4 @@
-import 'package:bookly_app/constats.dart';
+import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utilities/assets.dart';
 import 'package:bookly_app/core/utilities/routing/routes.dart';
 import 'package:bookly_app/core/utilities/styles.dart';
