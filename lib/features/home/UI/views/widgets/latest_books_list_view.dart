@@ -21,7 +21,7 @@ class LatestBooksListView extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: BookListViewItem(bookModel: state.books[index]),
+                child: BookListViewItem(book:  state.books[index], ),
               );
             },
           );

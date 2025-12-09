@@ -38,3 +38,30 @@ class FeaturedBooksListView extends StatelessWidget {
     );
   }
 }
+
+
+class ImageUrlHandler extends StatelessWidget {
+  final dynamic model;
+  final int index;
+
+  const ImageUrlHandler({
+    super.key,
+    required this.model,
+    required this.index,
+  });
+
+  Widget _imageUrlHandler() {
+    final String? imageUrl =
+        model.books[index].volumeInfo?.imageLinks?.thumbnail;
+
+    return (imageUrl != null && imageUrl.isNotEmpty)
+        ? CustomBookItem(imageUrl: imageUrl)
+        : const ErrorImageWidget();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _imageUrlHandler();
+  }
+}
+
