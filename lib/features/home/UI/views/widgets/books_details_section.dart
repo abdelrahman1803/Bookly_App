@@ -2,25 +2,32 @@ import 'package:bookly_app/core/utilities/styles.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/book_rating.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/books_action.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
+import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsSection extends StatelessWidget {
-  const BookDetailsSection({super.key});
-
+  const BookDetailsSection({super.key, required this.book});
+  final BookModel book;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width / 2,
-          child: const CustomBookItem(imageUrl: 'https://scontent.fcai19-1.fna.fbcdn.net/v/t39.30808-6/465796954_1740435256809270_7751944406033086737_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=QK0xaWA0mbMQ7kNvwE_tEdw&_nc_oc=Adl0o7anLgiNkiB4LL3QNpKaAv11ivfFecbcEOHFikvKpIjwsNdmaOUWQZhJoslbaRI&_nc_zt=23&_nc_ht=scontent.fcai19-1.fna&_nc_gid=iY-LX4rvKqHyCrvTuKfkMg&oh=00_AfndDF7jZjLyXbMwOFx_Wdqqys6VlVMIVZbjBMOOmguvMA&oe=693E341B',),
+          child: CustomBookItem(
+            imageUrl: book.volumeInfo!.imageLinks!.thumbnail!,
+          ),
         ),
         const SizedBox(height: 30),
-        const Text("The Jungle Book", style: Styles.textStyle30),
+        Text(
+          book.volumeInfo!.title!,
+          style: Styles.textStyle30,
+          textAlign: TextAlign.center,
+        ),
         Opacity(
           opacity: 0.7,
           child: Text(
-            "Writer Name",
+            book.volumeInfo!.authors?.join(", ") ?? "Writer Name not Available",
             style: Styles.textStyle18.copyWith(fontStyle: FontStyle.italic),
           ),
         ),

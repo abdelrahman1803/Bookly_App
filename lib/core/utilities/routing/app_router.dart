@@ -29,7 +29,7 @@ abstract class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) =>
               RelatedBooksCubit(getIt.get<HomeRepoImplementation>()),
-          child: BookDetailsView(bookModel: state.extra as BookModel),
+          child: BookDetailsView(book: state.extra as BookModel),
         ),
       ),
       // Search View Route
