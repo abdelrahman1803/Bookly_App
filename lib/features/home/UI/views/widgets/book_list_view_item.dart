@@ -17,7 +17,6 @@ class BookListViewItem extends StatelessWidget {
       onTap: () =>
           GoRouter.of(context).push(Routes.bookDetailsView, extra: book),
       child: SizedBox(
-        height: 100,
         child: Row(
           children: [
             CustomBookItem(imageUrl: book.volumeInfo!.imageLinks!.thumbnail!),
