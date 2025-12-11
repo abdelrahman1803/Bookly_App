@@ -14,10 +14,10 @@ class RelatedBooksCubit extends Cubit<RelatedBooksState> {
     var result = await homeRepo.fetchRelatedBooks(category: category);
     result.fold(
       (failure) {
-        return RelatedBooksFailure(failure.errMessage);
+        emit(RelatedBooksFailure(failure.errMessage));
       },
       (books) {
-        return RelatedBooksSuccess(books);
+        emit(RelatedBooksSuccess(books));
       },
     );
   }
