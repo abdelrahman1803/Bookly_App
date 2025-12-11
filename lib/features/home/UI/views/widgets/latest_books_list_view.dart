@@ -1,12 +1,12 @@
 import 'package:bookly_app/core/utilities/widgets/custom_error_widget.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
-import 'package:bookly_app/features/home/UI/views/widgets/book_list_view_item.dart';
 import 'package:bookly_app/features/home/UI/view%20models/latest%20books%20cubit/latest_books_cubit.dart';
+import 'package:bookly_app/features/home/UI/views/widgets/book_list_view_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LatestBooksListView extends StatelessWidget {
-  const LatestBooksListView({super.key, required bookModel});
+  const LatestBooksListView({super.key});
 
   @override
   Widget build(BuildContext context) {
