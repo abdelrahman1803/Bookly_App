@@ -12,7 +12,7 @@ class BookDetailsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        SliverFillRemaining(
+        SliverToBoxAdapter(
           child: Column(
             children: [
               const CustomBookDetailsAppBar(),
