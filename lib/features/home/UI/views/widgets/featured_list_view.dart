@@ -1,10 +1,12 @@
+import 'package:bookly_app/core/utilities/routing/routes.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_error_image_widget.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
 import 'package:bookly_app/core/utilities/widgets/widget_error.dart';
-import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
 import 'package:bookly_app/features/home/UI/view%20models/featured%20books%20cubit/featured_books_cubit.dart';
+import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class FeaturedBooksListView extends StatelessWidget {
   const FeaturedBooksListView({super.key});
@@ -23,7 +25,13 @@ class FeaturedBooksListView extends StatelessWidget {
                 final imageUrl =
                     state.books[index].volumeInfo?.imageLinks?.thumbnail;
                 return imageUrl != null && imageUrl.isNotEmpty
-                    ? CustomBookItem(imageUrl: imageUrl)
+                    ? GestureDetector(
+                        onTap: () => GoRouter.of(context).push(
+                          Routes.bookDetailsView,
+                          extra: state.books[index],
+                        ),
+                        child: CustomBookItem(imageUrl: imageUrl),
+                      )
                     : const ErrorImageWidget();
               },
               separatorBuilder: (context, index) => SizedBox(width: 10),
@@ -39,16 +47,11 @@ class FeaturedBooksListView extends StatelessWidget {
   }
 }
 
-
 class ImageUrlHandler extends StatelessWidget {
   final dynamic model;
   final int index;
 
-  const ImageUrlHandler({
-    super.key,
-    required this.model,
-    required this.index,
-  });
+  const ImageUrlHandler({super.key, required this.model, required this.index});
 
   Widget _imageUrlHandler() {
     final String? imageUrl =
@@ -64,4 +67,3 @@ class ImageUrlHandler extends StatelessWidget {
     return _imageUrlHandler();
   }
 }
-
