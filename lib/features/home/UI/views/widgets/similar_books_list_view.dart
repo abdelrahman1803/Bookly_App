@@ -1,4 +1,5 @@
 import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
+import 'package:bookly_app/core/utilities/widgets/widget_error.dart';
 import 'package:bookly_app/features/home/UI/view%20models/related_books_cubit/related_books_cubit.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class SimilarBooksListView extends StatelessWidget {
             ),
           );
         } else if (state is RelatedBooksFailure) {
-          return ErrorWidget(state.errMessage);
+          return WidgetError(errMessage: state.errMessage);
         } else {
           return const CustomLoadingIndicator();
         }
