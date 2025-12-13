@@ -1,12 +1,16 @@
 import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_button.dart';
+import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BooksAction extends StatelessWidget {
-  const BooksAction({super.key});
+  const BooksAction({super.key, required this.book});
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
+    final price = book.saleInfo?.listPrice?.amount;
     return Padding(
       padding: kPaddingSH16,
       child: SizedBox(
@@ -15,7 +19,7 @@ class BooksAction extends StatelessWidget {
           children: [
             Expanded(
               child: CustomButton(
-                text: "19.99 £",
+                text: price != null ? '\$${price}' : 'Not for sale',
                 textColor: Colors.black,
                 backGroundColor: Colors.white,
                 fontWeight: FontWeight.w900,
@@ -23,7 +27,12 @@ class BooksAction extends StatelessWidget {
                   topLeft: Radius.circular(12),
                   bottomLeft: Radius.circular(12),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  Uri url = Uri.parse(book.saleInfo!.buyLink!);
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  }
+                },
               ),
             ),
             Expanded(
@@ -36,7 +45,12 @@ class BooksAction extends StatelessWidget {
                   topRight: Radius.circular(12),
                   bottomRight: Radius.circular(12),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  Uri url = Uri.parse(book.volumeInfo!.previewLink!);
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  }
+                },
               ),
             ),
           ],
