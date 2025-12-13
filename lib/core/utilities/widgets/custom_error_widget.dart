@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomErrorWidget extends StatelessWidget {
+class CustomErrorWidget extends StatefulWidget {
   final String title;
   final String? errMessage;
   final VoidCallback? onRetry;
@@ -9,6 +9,8 @@ class CustomErrorWidget extends StatelessWidget {
   final Color backgroundColor;
   final Color accentColor;
   final EdgeInsetsGeometry padding;
+  final double maxWidth;
+  final int retryDelaySeconds;
 
   const CustomErrorWidget({
     super.key,
@@ -18,89 +20,178 @@ class CustomErrorWidget extends StatelessWidget {
     this.retryText = "Retry",
     this.icon,
     this.backgroundColor = const Color(0xFF2C2C2C),
-    this.accentColor = Colors.deepPurpleAccent,
+    this.accentColor = const Color.fromARGB(255, 255, 61, 61),
     this.padding = const EdgeInsets.all(16.0),
+    this.maxWidth = 500,
+    this.retryDelaySeconds = 10,
   });
+
+  @override
+  State<CustomErrorWidget> createState() => _CustomErrorWidgetState();
+}
+
+class _CustomErrorWidgetState extends State<CustomErrorWidget> {
+  int _retryCountdown = 0;
+  bool _isRetrying = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _handleRetry() {
+    if (_isRetrying) return;
+
+    setState(() {
+      _isRetrying = true;
+      _retryCountdown = widget.retryDelaySeconds;
+    });
+
+    // Call the retry callback
+    widget.onRetry?.call();
+
+    // Start countdown timer
+    Future.delayed(Duration(seconds: 1), () {
+      _startCountdown();
+    });
+  }
+
+  void _startCountdown() {
+    if (_retryCountdown > 0) {
+      setState(() {
+        _retryCountdown--;
+      });
+      Future.delayed(Duration(seconds: 1), _startCountdown);
+    } else {
+      if (mounted) {
+        setState(() {
+          _isRetrying = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    // final screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(
-      width: double.infinity,
-      height: double.infinity, // ياخد مساحة الشاشة كلها
-      color: backgroundColor,
-      alignment: Alignment.center,
-      padding: padding,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Icon or Image
-          if (icon != null)
-            SizedBox(height: 88, child: icon)
-          else
-            Container(
-              height: 88,
-              width: 88,
-              decoration: BoxDecoration(
-                color: accentColor.withOpacity(0.12),
-                shape: BoxShape.circle,
+    // Calculate responsive icon size based on available space
+    final availableHeight = screenHeight * 0.35;
+    final iconSize = (availableHeight * 0.15).clamp(24.0, 44.0);
+    final containerSize = (iconSize * 1.8).clamp(40.0, 88.0);
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: screenHeight * 0.35,
+          maxWidth: widget.maxWidth,
+        ),
+        child: Center(
+          child: Container(
+            color: widget.backgroundColor,
+            alignment: Alignment.center,
+            padding: widget.padding,
+            child: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Icon or Image - Responsive
+                  if (widget.icon != null)
+                    SizedBox(height: containerSize, child: widget.icon)
+                  else
+                    Container(
+                      height: containerSize,
+                      width: containerSize,
+                      decoration: BoxDecoration(
+                        color: widget.accentColor.withOpacity(0.12),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.error_outline,
+                        size: iconSize,
+                        color: widget.accentColor,
+                      ),
+                    ),
+
+                  SizedBox(height: availableHeight * 0.05),
+
+                  // Title
+                  Text(
+                    widget.title,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.w700,
+                      fontSize: (availableHeight * 0.05).clamp(14.0, 18.0),
+                      color: Colors.white,
+                    ),
+                  ),
+
+                  SizedBox(height: availableHeight * 0.025),
+
+                  // Message
+                  Text(
+                    widget.errMessage!,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                      color: Colors.grey[300],
+                      fontSize: (availableHeight * 0.04).clamp(12.0, 14.0),
+                      height: 1.35,
+                    ),
+                  ),
+
+                  SizedBox(height: availableHeight * 0.05),
+
+                  // Retry button with loading indicator
+                  if (widget.onRetry != null)
+                    ElevatedButton(
+                      onPressed: _isRetrying ? null : _handleRetry,
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: widget.accentColor,
+                        disabledBackgroundColor: widget.accentColor.withOpacity(
+                          0.5,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 12,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: _isRetrying
+                          ? SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2.5,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                            )
+                          : Text(
+                              widget.retryText,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                    ),
+                ],
               ),
-              child: Icon(Icons.error_outline, size: 44, color: accentColor),
-            ),
-
-          const SizedBox(height: 18),
-
-          // Title
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: theme.textTheme.titleMedium!.copyWith(
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
-              color: Colors.white,
             ),
           ),
-
-          const SizedBox(height: 8),
-
-          // Message
-          Text(
-            errMessage!,
-            textAlign: TextAlign.center,
-            style: theme.textTheme.bodyMedium!.copyWith(
-              color: Colors.grey[300],
-              height: 1.35,
-            ),
-          ),
-
-          const SizedBox(height: 18),
-
-          // Retry button only
-          if (onRetry != null)
-            ElevatedButton(
-              onPressed: onRetry,
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: accentColor,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 18,
-                  vertical: 12,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                retryText,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-        ],
+        ),
       ),
     );
   }

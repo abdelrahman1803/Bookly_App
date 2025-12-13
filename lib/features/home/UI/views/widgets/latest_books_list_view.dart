@@ -14,7 +14,7 @@ class LatestBooksListView extends StatelessWidget {
       builder: (context, state) {
         if (state is LatestBooksSuccess) {
           return ListView.builder(
-            // shrinkWrap: true, //used with sliverToBoxAdapter()
+            shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.zero,
             itemCount: state.books.length,
@@ -26,7 +26,10 @@ class LatestBooksListView extends StatelessWidget {
             },
           );
         } else if (state is LatestBooksFailure) {
-          return CustomErrorWidget(errMessage: state.errMessage);
+          return CustomErrorWidget(
+            errMessage: state.errMessage,
+            onRetry: () => context.read<LatestBooksCubit>().fetchLatestBooks(),
+          );
         } else {
           return const CustomLoadingIndicator();
         }

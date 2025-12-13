@@ -1,7 +1,7 @@
 import 'package:bookly_app/core/utilities/routing/routes.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_error_image_widget.dart';
+import 'package:bookly_app/core/utilities/widgets/custom_error_widget.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
-import 'package:bookly_app/core/utilities/widgets/widget_error.dart';
 import 'package:bookly_app/features/home/UI/view%20models/featured%20books%20cubit/featured_books_cubit.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
@@ -37,33 +37,19 @@ class FeaturedBooksListView extends StatelessWidget {
               separatorBuilder: (context, index) => SizedBox(width: 10),
             );
           } else if (state is FeaturedBooksFailure) {
-            return WidgetError(errMessage: state.errMessage);
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: CustomErrorWidget(
+                errMessage: state.errMessage,
+                onRetry: () =>
+                    context.read<FeaturedBooksCubit>().fetchFeaturedBooks(),
+              ),
+            );
           } else {
             return const CustomLoadingIndicator();
           }
         },
       ),
     );
-  }
-}
-
-class ImageUrlHandler extends StatelessWidget {
-  final dynamic model;
-  final int index;
-
-  const ImageUrlHandler({super.key, required this.model, required this.index});
-
-  Widget _imageUrlHandler() {
-    final String? imageUrl =
-        model.books[index].volumeInfo?.imageLinks?.thumbnail;
-
-    return (imageUrl != null && imageUrl.isNotEmpty)
-        ? CustomBookItem(imageUrl: imageUrl)
-        : const ErrorImageWidget();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _imageUrlHandler();
   }
 }
