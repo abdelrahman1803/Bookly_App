@@ -13,10 +13,12 @@ class BookListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final price = book.saleInfo?.listPrice?.amount;
     return GestureDetector(
       onTap: () =>
           GoRouter.of(context).push(Routes.bookDetailsView, extra: book),
       child: SizedBox(
+        height: 100,
         child: Row(
           children: [
             CustomBookItem(imageUrl: book.volumeInfo!.imageLinks!.thumbnail!),
@@ -43,6 +45,7 @@ class BookListViewItem extends StatelessWidget {
                       book.volumeInfo?.authors?.firstOrNull ??
                           'Writer Name not Available',
                       style: Styles.textStyle14,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
 
@@ -50,7 +53,7 @@ class BookListViewItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Free",
+                        price != null ? '\$$price' : 'Free',
                         style: Styles.textStyle20.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
