@@ -29,12 +29,13 @@ class BookDetailsSection extends StatelessWidget {
           child: Text(
             book.volumeInfo!.authors?.join(", ") ?? "Writer Name not Available",
             style: Styles.textStyle18.copyWith(fontStyle: FontStyle.italic),
+            textAlign: TextAlign.center,
           ),
         ),
         const SizedBox(height: 10),
         const BookRating(mainAxisAlignment: MainAxisAlignment.center),
         const SizedBox(height: 30),
-        BooksAction(book: book,),
+        BooksAction(book: book),
       ],
     );
   }
