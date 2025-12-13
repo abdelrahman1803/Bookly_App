@@ -19,7 +19,7 @@ class BooksAction extends StatelessWidget {
           children: [
             Expanded(
               child: CustomButton(
-                text: price != null ? '\$${price}' : 'Not for sale',
+                text: price != null ? '\$$price' : 'Not for sale',
                 textColor: Colors.black,
                 backGroundColor: Colors.white,
                 fontWeight: FontWeight.w900,
