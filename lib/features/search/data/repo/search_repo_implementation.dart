@@ -6,10 +6,10 @@ import 'package:bookly_app/features/home/data/models/book_model/book_model.dart'
 import 'package:bookly_app/features/search/data/repo/search_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class SearchRepoImplement implements SearchRepo {
+class SearchRepoImplementation implements SearchRepo {
   final ApiServices apiServices;
 
-  SearchRepoImplement(this.apiServices);
+  SearchRepoImplementation(this.apiServices);
   @override
   Future<Either<Failure, List<BookModel>>> fetchSearchBooks({
     required String title,
@@ -17,7 +17,7 @@ class SearchRepoImplement implements SearchRepo {
     try {
       var data = await apiServices.get(
         endPoint:
-            'volumes?Filtering=free-ebooks&sorting=relevence&q=programming&title=$title',
+            'volumes?Filtering=free-ebooks&sorting=relevance&q=$title',
       );
       return right(BookModelResponse().parseBookModels(data, nullable: true));
     } catch (e) {

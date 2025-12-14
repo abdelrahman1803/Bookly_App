@@ -9,6 +9,7 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.searchRepo) : super(SearchInitial());
   final SearchRepo searchRepo;
   Future<void> fetchSearchBooks({required String title}) async {
+    if (title.trim().length < 3) return;
     emit(SearchLoading());
     var result = await searchRepo.fetchSearchBooks(title: title);
     result.fold(
@@ -19,5 +20,9 @@ class SearchCubit extends Cubit<SearchState> {
         emit(SearchSuccess(books));
       },
     );
+  }
+
+  void resetSearch() {
+    emit(SearchInitial());
   }
 }
