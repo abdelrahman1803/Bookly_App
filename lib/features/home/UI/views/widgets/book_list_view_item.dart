@@ -13,47 +13,45 @@ class BookListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final price = book.saleInfo?.listPrice?.amount;
     return GestureDetector(
       onTap: () =>
           GoRouter.of(context).push(Routes.bookDetailsView, extra: book),
       child: SizedBox(
-        height: 100,
+        height: 120,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomBookItem(imageUrl: book.volumeInfo!.imageLinks!.thumbnail!),
-            const SizedBox(width: 30),
+            const SizedBox(width: 20),
             Expanded(
+              flex: 3,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: Text(
-                      book.volumeInfo!.title!,
-                      style: Styles.textStyle20.copyWith(
-                        fontFamily: kGtSectraFine,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                  Text(
+                    book.volumeInfo!.title!,
+                    style: Styles.textStyle20.copyWith(
+                      fontFamily: kGtSectraFine,
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 3),
-                    child: Text(
-                      book.volumeInfo?.authors?.firstOrNull ??
-                          'Writer Name not Available',
-                      style: Styles.textStyle14,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                  const SizedBox(height: 4),
+                  Text(
+                    book.volumeInfo?.authors?.firstOrNull ??
+                        'Writer Name not Available',
+                    style: Styles.textStyle14,
+                    overflow: TextOverflow.ellipsis,
                   ),
-
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        price != null ? '\$$price' : 'Free',
+                        book.saleInfo?.listPrice?.amount != null
+                            ? '\$${book.saleInfo!.listPrice!.amount}'
+                            : 'Free',
                         style: Styles.textStyle20.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
