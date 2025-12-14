@@ -1,6 +1,6 @@
+import 'package:bookly_app/core/shimmer/placeholders/book_cover_shimmer.dart';
 import 'package:bookly_app/core/utilities/routing/routes.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_error_widget.dart';
-import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
 import 'package:bookly_app/features/home/UI/view%20models/related_books_cubit/related_books_cubit.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,17 @@ class SimilarBooksListView extends StatelessWidget {
                 context.read<RelatedBooksCubit>().retryFetchRelatedBooks(),
           );
         } else {
-          return const CustomLoadingIndicator();
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.15,
+            child: ListView.separated(
+              itemCount: 6,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return const BookCoverShimmer(width: 85, height: 120);
+              },
+              separatorBuilder: (context, index) => const SizedBox(width: 6),
+            ),
+          );
         }
       },
     );

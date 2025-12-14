@@ -1,7 +1,7 @@
+import 'package:bookly_app/core/shimmer/placeholders/featured_list_item_shimmer.dart';
 import 'package:bookly_app/core/utilities/routing/routes.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_error_image_widget.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_error_widget.dart';
-import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
 import 'package:bookly_app/features/home/UI/view%20models/featured%20books%20cubit/featured_books_cubit.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,13 @@ class FeaturedBooksListView extends StatelessWidget {
               ),
             );
           } else {
-            return const CustomLoadingIndicator();
+            return ListView.separated(
+              itemCount: 6,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) =>
+                  const FeaturedListItemShimmer(),
+              separatorBuilder: (context, index) => const SizedBox(width: 10),
+            );
           }
         },
       ),

@@ -1,5 +1,5 @@
+import 'package:bookly_app/core/shimmer/core/shimmer_container.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_error_image_widget.dart';
-import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,11 @@ class CustomBookItem extends StatelessWidget {
           child: CachedNetworkImage(
             fit: BoxFit.fill,
             imageUrl: imageUrl,
-            placeholder: (context, url) => CustomLoadingIndicator(),
+            placeholder: (context, url) => const ShimmerContainer(
+              width: double.infinity,
+              height: double.infinity,
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
             errorWidget: (context, url, error) => const ErrorImageWidget(),
           ),
         ),

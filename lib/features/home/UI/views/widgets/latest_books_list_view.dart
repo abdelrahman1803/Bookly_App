@@ -1,5 +1,5 @@
+import 'package:bookly_app/core/shimmer/placeholders/vertical_book_list_item_shimmer.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_error_widget.dart';
-import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
 import 'package:bookly_app/features/home/UI/view%20models/latest%20books%20cubit/latest_books_cubit.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/book_list_view_item.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,18 @@ class LatestBooksListView extends StatelessWidget {
             onRetry: () => context.read<LatestBooksCubit>().fetchLatestBooks(),
           );
         } else {
-          return const CustomLoadingIndicator();
+          return ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            itemCount: 6,
+            itemBuilder: (BuildContext context, int index) {
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: VerticalBookListItemShimmer(),
+              );
+            },
+          );
         }
       },
     );

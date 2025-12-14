@@ -1,6 +1,6 @@
+import 'package:bookly_app/core/shimmer/placeholders/search_result_list_shimmer.dart';
 import 'package:bookly_app/core/utilities/styles.dart';
 import 'package:bookly_app/core/utilities/widgets/custom_error_widget.dart';
-import 'package:bookly_app/core/utilities/widgets/custom_loading_indicator.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/book_list_view_item.dart';
 import 'package:bookly_app/features/search/UI/view%20models/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class SearchResultListView extends StatelessWidget {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         if (state is SearchLoading) {
-          return const CustomLoadingIndicator();
+          return const SearchResultListShimmer();
         }
 
         if (state is SearchSuccess) {
