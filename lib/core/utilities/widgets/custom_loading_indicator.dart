@@ -18,7 +18,6 @@ class CustomLoadingIndicator extends StatefulWidget {
 
 class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
     with SingleTickerProviderStateMixin {
-
   late AnimationController _controller;
   late Animation<double> _scale;
 
@@ -26,16 +25,11 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    )..repeat(reverse: true);
+    _controller = AnimationController(vsync: this, duration: widget.duration)
+      ..repeat(reverse: true);
 
     _scale = Tween<double>(begin: 0.65, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOutCubic,
-      ),
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOutCubic),
     );
   }
 
@@ -61,7 +55,7 @@ class _CustomLoadingIndicatorState extends State<CustomLoadingIndicator>
                 color: widget.color.withOpacity(.3),
                 blurRadius: 8,
                 spreadRadius: 1.5,
-              )
+              ),
             ],
           ),
           child: Center(

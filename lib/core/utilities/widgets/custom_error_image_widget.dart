@@ -6,7 +6,7 @@ class ErrorImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadiusGeometry.circular(16),
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
       child: AspectRatio(
         aspectRatio: 0.7,
         child: Container(
@@ -14,13 +14,13 @@ class ErrorImageWidget extends StatelessWidget {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children:  [
                 Icon(
                   Icons.menu_book_rounded,
                   size: 40,
                   color: Colors.grey.shade500,
                 ),
-                const SizedBox(height: 8),
+                  const SizedBox(height: 8),
                 Text(
                   "No Cover",
                   style: TextStyle(

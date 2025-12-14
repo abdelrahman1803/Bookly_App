@@ -17,7 +17,7 @@ class HomeViewBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(padding: kPaddingSH16, child: const CustomAppBar()),
+              const Padding(padding: kPaddingSH16, child: CustomAppBar()),
               const FeaturedBooksListView(),
               const SizedBox(height: 36),
               Padding(
@@ -33,11 +33,8 @@ class HomeViewBody extends StatelessWidget {
             ],
           ),
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: kPaddingSH16,
-            child: const LatestBooksListView(),
-          ),
+        const SliverToBoxAdapter(
+          child: Padding(padding: kPaddingSH16, child: LatestBooksListView()),
         ),
       ],
     );

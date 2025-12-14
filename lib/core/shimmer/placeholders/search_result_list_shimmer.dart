@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_underscores
+
 import 'package:bookly_app/core/shimmer/placeholders/vertical_book_list_item_shimmer.dart';
 import 'package:flutter/material.dart';
 

@@ -38,7 +38,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AnimatedLogo(popUpAnimation: popUpAnimation),
-
+          const SizedBox(height: 10),
           AnimatedText(
             animationController: animationController,
             fadeAnimation: fadeAnimation,
@@ -60,7 +60,10 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
 
     slideAnimation =
-        Tween<Offset>(begin: const Offset(0, 0.7), end: Offset.zero).animate(
+        Tween<Offset>(
+          begin: const Offset(0, 0.7),
+          end: const Offset(0, 0),
+        ).animate(
           CurvedAnimation(
             parent: animationController,
             curve: const Interval(0.5, 1, curve: Curves.easeOut),

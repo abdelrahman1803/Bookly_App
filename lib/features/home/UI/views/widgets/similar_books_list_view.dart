@@ -33,7 +33,7 @@ class SimilarBooksListView extends StatelessWidget {
                   ),
                 );
               },
-              separatorBuilder: (context, index) => SizedBox(width: 6),
+              separatorBuilder: (context, index) => const SizedBox(width: 6),
             ),
           );
         } else if (state is RelatedBooksFailure) {

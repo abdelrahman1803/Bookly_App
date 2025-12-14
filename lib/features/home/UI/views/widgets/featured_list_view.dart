@@ -34,7 +34,7 @@ class FeaturedBooksListView extends StatelessWidget {
                       )
                     : const ErrorImageWidget();
               },
-              separatorBuilder: (context, index) => SizedBox(width: 10),
+              separatorBuilder: (context, index) => const SizedBox(width: 10),
             );
           } else if (state is FeaturedBooksFailure) {
             return Padding(

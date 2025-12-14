@@ -58,15 +58,15 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
         filled: true,
         fillColor: Colors.deepPurpleAccent[50],
         labelText: "Search",
-        labelStyle: TextStyle(color: Colors.deepPurpleAccent),
+        labelStyle: const TextStyle(color: Colors.deepPurpleAccent),
       ),
     );
   }
 
   OutlineInputBorder buildOutlineInputBorder() {
-    return OutlineInputBorder(
+    return const OutlineInputBorder(
       borderSide: BorderSide(color: Colors.deepPurpleAccent),
-      borderRadius: BorderRadius.circular(5.5),
+      borderRadius: BorderRadius.all(Radius.circular(5.5)),
     );
   }
 }

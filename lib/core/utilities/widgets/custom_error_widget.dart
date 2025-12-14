@@ -95,7 +95,7 @@ class _CustomErrorWidgetState extends State<CustomErrorWidget> {
             alignment: Alignment.center,
             padding: widget.padding,
             child: SingleChildScrollView(
-              physics: const NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -160,7 +160,7 @@ class _CustomErrorWidgetState extends State<CustomErrorWidget> {
                         disabledBackgroundColor: widget.accentColor.withOpacity(
                           0.5,
                         ),
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 24,
                           vertical: 12,
                         ),
@@ -181,7 +181,7 @@ class _CustomErrorWidgetState extends State<CustomErrorWidget> {
                             )
                           : Text(
                               widget.retryText,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
                               ),
