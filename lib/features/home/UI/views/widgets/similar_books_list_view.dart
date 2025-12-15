@@ -55,7 +55,16 @@ class SimilarBooksListView extends StatelessWidget {
               itemCount: 6,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                return const BookCoverShimmer(width: 85, height: 120);
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: const AspectRatio(
+                    aspectRatio: 0.7,
+                    child: BookCoverShimmer(
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+                  ),
+                );
               },
               separatorBuilder: (context, index) => const SizedBox(width: 6),
             ),
