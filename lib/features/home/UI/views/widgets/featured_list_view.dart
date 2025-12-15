@@ -37,12 +37,15 @@ class FeaturedBooksListView extends StatelessWidget {
               separatorBuilder: (context, index) => const SizedBox(width: 10),
             );
           } else if (state is FeaturedBooksFailure) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CustomErrorWidget(
-                errMessage: state.errMessage,
-                onRetry: () =>
-                    context.read<FeaturedBooksCubit>().fetchFeaturedBooks(),
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: CustomErrorWidget(
+                  errMessage: state.errMessage,
+                  onRetry: () =>
+                      context.read<FeaturedBooksCubit>().fetchFeaturedBooks(),
+                ),
               ),
             );
           } else {

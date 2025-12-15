@@ -37,10 +37,16 @@ class SimilarBooksListView extends StatelessWidget {
             ),
           );
         } else if (state is RelatedBooksFailure) {
-          return CustomErrorWidget(
-            errMessage: state.errMessage,
-            onRetry: () =>
-                context.read<RelatedBooksCubit>().retryFetchRelatedBooks(),
+          return SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: CustomErrorWidget(
+                errMessage: state.errMessage,
+                onRetry: () =>
+                    context.read<RelatedBooksCubit>().retryFetchRelatedBooks(),
+              ),
+            ),
           );
         } else {
           return SizedBox(
