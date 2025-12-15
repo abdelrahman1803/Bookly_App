@@ -52,7 +52,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void initAnimation() {
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1200),
+      duration: const Duration(milliseconds: 1500),
     );
 
     popUpAnimation = Tween<double>(begin: 0, end: 1).animate(
@@ -81,7 +81,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   void nanvigateHome() {
-    Future.delayed(const Duration(milliseconds: 2500), () {
+    Future.delayed(const Duration(milliseconds: 3000), () {
       // Get.to(
       //   () => const HomeView(),
       //   transition: Transition.fade,
