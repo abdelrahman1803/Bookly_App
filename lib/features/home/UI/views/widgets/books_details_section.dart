@@ -1,4 +1,5 @@
 import 'package:bookly_app/core/utilities/styles.dart';
+import 'package:bookly_app/core/utilities/widgets/custom_error_image_widget.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/book_rating.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/books_action.dart';
 import 'package:bookly_app/features/home/UI/views/widgets/custom_book_item.dart';
@@ -10,13 +11,14 @@ class BookDetailsSection extends StatelessWidget {
   final BookModel book;
   @override
   Widget build(BuildContext context) {
+    final imageUrl = book.volumeInfo?.imageLinks?.thumbnail;
     return Column(
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width / 2,
-          child: CustomBookItem(
-            imageUrl: book.volumeInfo!.imageLinks!.thumbnail!,
-          ),
+          child: imageUrl != null && imageUrl.isNotEmpty
+              ? CustomBookItem(imageUrl: imageUrl)
+              : const ErrorImageWidget(),
         ),
         const SizedBox(height: 30),
         Text(

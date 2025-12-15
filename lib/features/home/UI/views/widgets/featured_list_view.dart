@@ -24,15 +24,14 @@ class FeaturedBooksListView extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 final imageUrl =
                     state.books[index].volumeInfo?.imageLinks?.thumbnail;
-                return imageUrl != null && imageUrl.isNotEmpty
-                    ? GestureDetector(
-                        onTap: () => GoRouter.of(context).push(
-                          Routes.bookDetailsView,
-                          extra: state.books[index],
-                        ),
-                        child: CustomBookItem(imageUrl: imageUrl),
-                      )
-                    : const ErrorImageWidget();
+                return GestureDetector(
+                  onTap: () => GoRouter.of(
+                    context,
+                  ).push(Routes.bookDetailsView, extra: state.books[index]),
+                  child: imageUrl != null && imageUrl.isNotEmpty
+                      ? CustomBookItem(imageUrl: imageUrl)
+                      : const ErrorImageWidget(),
+                );
               },
               separatorBuilder: (context, index) => const SizedBox(width: 10),
             );

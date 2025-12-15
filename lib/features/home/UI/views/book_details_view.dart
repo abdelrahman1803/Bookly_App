@@ -15,9 +15,12 @@ class _BookDetailsViewState extends State<BookDetailsView> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<RelatedBooksCubit>(
-      context,
-    ).fetchRelatedBooks(category: widget.book.volumeInfo!.categories![0]);
+    final category = widget.book.volumeInfo?.categories?.firstOrNull;
+    if (category != null) {
+      BlocProvider.of<RelatedBooksCubit>(
+        context,
+      ).fetchRelatedBooks(category: category);
+    }
   }
 
   @override
