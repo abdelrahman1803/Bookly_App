@@ -42,7 +42,7 @@ class HomeRepoImplementation implements HomeRepo {
     try {
       var data = await apiServices.get(
         endPoint:
-            'volumes?Filtering=free-ebooks&sorting=relevence&q=programming',
+            'volumes?Filtering=free-ebooks&sorting=relevance&q=subject:$category',
       );
       return right(BookModelResponse().parseBookModels(data));
     } catch (e) {
