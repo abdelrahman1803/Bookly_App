@@ -11,15 +11,32 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset(AssetsData.logo, height: 20),
-          IconButton(
-            onPressed: () => GoRouter.of(context).push(Routes.searchView),
-            icon: const Icon(FontAwesomeIcons.magnifyingGlass, size: 24),
-          ),
-        ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          double logoHeight;
+
+          if (constraints.maxWidth >= 1200) {
+            // Desktop / Large screens
+            logoHeight = 40;
+          } else if (constraints.maxWidth >= 800) {
+            // Tablet
+            logoHeight = 32;
+          } else {
+            // Mobile
+            logoHeight = 24;
+          }
+
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(AssetsData.logo, height: logoHeight),
+              IconButton(
+                onPressed: () => GoRouter.of(context).push(Routes.searchView),
+                icon: Icon(FontAwesomeIcons.magnifyingGlass, size: logoHeight),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
